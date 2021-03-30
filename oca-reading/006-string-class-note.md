@@ -76,3 +76,53 @@ String s =  "abc";
 ---
 
 ## Important Methods in the String Class
+
+- **public char charAt(int index)**
+
+- returns the character located at the String’s specified index.
+
+```java
+
+  String x = "airplane";
+
+  System.out.print(x.charAt(2));
+// output is 'r'
+
+```
+
+- **public String concat(String s)**
+  - returns a string with the value of the String passed in to the method appended to the end of the String used to invoke the method
+
+```java
+
+  String x = "taxi";
+
+  System.out.print(x.concat("cab"));
+// output is ' taxi cab'
+
+```
+
+- **public String replace(char old, char new)**
+  - returns a String whose value is that of the String used to invoke the method, but updated so that any occurrence of the char in the first argument is replaced by the char in the second argument
+
+```java
+
+  String x = "oxoxoxox";
+
+  System.out.print(x.replace("x","X"));
+// output is ' oXoXoXoX'
+
+```
+
+- **public String substring(int begin)**
+- **public String substring(int begin, int end)**
+
+## The StringBuilderClass
+
+- should be used when you have to make a lot of modifications to strings of characters.
+
+**Note:**
+_A common use for StringBuilders is file I/O when large, ever-changing streams of input are being handled by the program. In these cases, large blocks of characters are handled as units, and StringBuilder objects are the ideal way to handle a block of data, pass it on, and then reuse the same memory to handle the next block of data._
+
+
+### Using StringBuilder

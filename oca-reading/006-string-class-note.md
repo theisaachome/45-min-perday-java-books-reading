@@ -124,5 +124,105 @@ String s =  "abc";
 **Note:**
 _A common use for StringBuilders is file I/O when large, ever-changing streams of input are being handled by the program. In these cases, large blocks of characters are handled as units, and StringBuilder objects are the ideal way to handle a block of data, pass it on, and then reuse the same memory to handle the next block of data._
 
-
 ### Using StringBuilder
+
+```java
+
+	StringBuilder sb = new StringBuilder("abc");
+
+	sb.append("def");
+
+	System.out.println(sb);
+
+```
+
+- these method calls can be chained to each other
+
+#### Example
+
+```java
+
+StringBuilder sb = new StringBuilder("abc");
+
+sb.append("def").reverse().insert(4, "----");
+
+System.out.println(sb);
+
+```
+
+- there are three ways to create a new StringBuilder:
+
+  The two most common ways to work with
+
+  ```java
+  // defaul capacity= 16 characters
+  StringBuilder sb0 = new StringBuilder();
+
+  // defaul capacity= 16 + arg length
+  StringBuilder sb = new StringBuilder("abc");
+
+  // capacity = x (size)
+  StringBuilder x = new StringBuilder(20);
+  x.append("Hello World");
+  ```
+
+### **Three rules to keep in mind when appending and inserting:**
+
+- append() grows a StringBuilder past its capacity, the capacity is updated automatically.
+
+- insert() starts within a StringBuilder’s capacity but ends after the current capacity, the capacity is updated automatically.
+
+- insert() attempts to start at an index after the StringBuilder’s current length, an exception will be thrown.
+
+---
+
+## Important Methods in the StringBuilder Class
+
+- **_public StringBuilder append(String s)_**
+
+```java
+
+StringBuilder gameName = new StringBuilder("PUBG");
+
+gameName.append("MOBILE");
+
+System.out.println(gameName);
+
+```
+
+- **_public StringBuilder delete(int start, int end)_**
+  - the first argument (which is zero-based),
+  - the second argument (but it is one-based)!
+
+```java
+
+StringBuilder number = new StringBuilder("0123456789");
+
+System.out.println(number.delete(4, 6));
+
+// 01236789
+
+```
+
+- **_public StringBuilder insert(int offset, String s)_**
+  - the first argument (which is zero-based)
+
+```java
+
+StringBuilder number = new StringBuilde("0123456789");
+
+number.append("def").insert(4, "----");
+
+System.out.println(number);
+
+```
+
+- **_public StringBuilder reverse()_**
+  - the first character becoming the last, the second becoming the second to the last,
+
+```java
+
+StringBuilder reverse= new StringBuilder("abcdef");
+reverse.reverse();
+
+```

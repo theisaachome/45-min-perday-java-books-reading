@@ -2,12 +2,14 @@
 
 [Table of Contents](#table-of-contents)
 
-- [
-  Define Classes and Interfaces](#define-classes-and-interfaces)
-- The static keyword and init blocks
-- Abstract classes
-- The final keyword
-- Enums 2.5 Interfaces
+- [Define Classes and Interfaces](#define-classes-and-interfaces)
+- [Class Access](#class-access)
+- [Default Access](#default-access)
+- [Public Access](#public-access)
+- [Other Nonaccess Class Modifiers](#other-nonaccess-class-modifiers)
+- [Final Classes](#final-classes)
+- [Abstract Classes](#abstract-classes)
+- [Use Interfaces](#use-interfaces)
 
 ---
 
@@ -118,3 +120,215 @@
   - Marking a class as strictfp means that
   - any method code in the class will conform strictly
   - to the IEEE 754 standard rules for floating points.
+
+---
+
+### **_Final Classes_**
+
+- In a class declaration, the final keyword means the class can’t be subclassed.
+
+- No other class can ever extend a final class, and any attempts to do so will result in a compiler error.
+
+- **_final_** gives you the security that nobody can change the implementation out from under you.
+
+- You’ll notice many classes in the Java core libraries are final.
+
+```java
+package cert;
+public final class Beverage{
+  public importantMethod(){}
+}
+
+package exame.stuff;
+import cert.Beverage;
+class Tea extends Beverage{}
+
+// can't subclass final classes
+```
+
+---
+
+### **_Abstract Classes_**
+
+- An abstract class can never be instantiated.
+- The class might be just too, well, abstract.
+- imagine you have a class Car that has generic methods common to all vehicles.
+- But you don’t want anyone actually creating a generic abstract Car object.
+
+- to instantiate actual car types such as BMWBoxster and SubaruOutback.
+
+_example_
+
+```java
+abstract class Car{
+  private double price;
+  private String model;
+  private String year;
+  private abstract void goFast();
+  private abstract void goUpHill();
+  private abstract void impressNeighbbors();
+}
+```
+
+- if even a single method is abstract, the whole class must be declared abstract.
+- One abstract method spoils the whole bunch.
+- there can be nonabstract methods in an abstract class.
+
+final NOTE:
+
+- You can’t mark a class as both **_abstract and final_**.
+
+- They have nearly **_opposite meanings_**.
+
+- An _abstract class must be subclassed_, whereas _a final class must not be subclassed_.
+
+---
+
+### **Use Interfaces**
+
+#### Declaring an Interface
+
+- An interface is a contract.
+
+- Any concrete class type that implements this interface must agree to write the code for methods in the interface.
+
+- Interfaces can be implemented by any class and from any inheritance tree.
+
+### The relationship between interfaces and classes
+
+- Think of an interface as a 100-percent abstract class.
+
+- Like an abstract class, an interface defines abstract methods.
+
+- Although an abstract class can define both abstract and nonabstract methods.
+
+- An interface generally has only abstract methods
+
+**_These rules are strict:_**
+
+- All interface methods are implicitly public.
+
+- All variables defined in an interface must be public, static, and final—in other words,
+
+  - interfaces can declare only constants, not instance variables.
+
+- Interface methods cannot be marked final, strictfp, or native.
+
+- An interface can extend one or more other interfaces.
+
+- An interface cannot extend anything but another interface.
+
+- An interface cannot implement another interface or class.
+
+- An interface must be declared with the keyword interface.
+
+- interfaces are implicitly abstract.
+
+```java
+ public interface Bounceable{
+   void bounce();
+   void setBouncefactor(int bf);
+ }
+```
+
+- the following interface methods are legal and identical:
+
+```java
+ void bounce();
+ public void bounce();
+ abstract void bounce();
+ public abstract void bounce();
+ abstract public void bounce();
+```
+
+- all interface methods are implicitly public and abstract.
+
+- The following interface method declarations won’t compile:
+
+---
+
+### Declaring Interface Constants
+
+- Constants in an interfacec.
+
+- any class implementing the interface will have access to the same constant.
+
+- one key rule for interface constants.
+
+  ```java
+  public static final
+  ```
+
+- Just as interface methods are always public and abstract.
+
+- any variable defined in an interface **_must be_** and **_implicitly_** is a public constant.
+
+```java
+ interface foo{
+   int BAR = 42;
+   void go ();
+ }
+
+ class Zap implements Food{
+   public void go(){
+     // theBAR = 27assignmentwill not compile.
+     BAR = 27;
+     // access it and use it,but as a read-only value.
+     System.out.print(BAR);
+   }
+ }
+```
+
+- the implementing class can access it and use it,but as a read-only value.
+
+---
+
+### Declaring default Interface Methods
+
+- simple declaration rules:
+
+- **_default methods are :_**
+
+  - declared by using the default keyword.
+
+  - The keyword can be used only with interface method signatures.
+
+  - public by definition,and the public modifier is optional.
+
+  - cannot be marked as private, protected, static, final, or abstract.
+
+  - default methods must have a concrete method body.
+
+```java
+interface TestDefault{
+  // legal
+  default int m1(){return 1;}
+  // legal
+  public  default void m1(){}
+
+  // illegal: default can not be marked static
+  static default void m3(){}
+  // illegal: default must have a method body
+  default void m4();
+}
+```
+
+---
+
+### Declaring static Interface Methods
+
+- using static interface methods:
+
+- static interface methods are :
+
+  - declared by using the static keyword.
+
+  - public, by default, and the public
+    modifier is optional.
+  - cannot be marked as private, protected,
+    final, or abstract.
+  - must have a concrete method body.
+
+  - When invoking a static interface method, the method’s type (interface name) MUST be included in the invocation.
+
+- Here are some examples of legal and illegal static interface methods and their use:

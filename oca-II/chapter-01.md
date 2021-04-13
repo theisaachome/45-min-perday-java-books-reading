@@ -10,6 +10,8 @@
 - [Final Classes](#final-classes)
 - [Abstract Classes](#abstract-classes)
 - [Use Interfaces](#use-interfaces)
+- [Declare Class Members](#declare-class-members)
+  - [Access Modifiers](#access-modifiers)
 
 ---
 
@@ -332,3 +334,86 @@ interface TestDefault{
   - When invoking a static interface method, the method’s type (interface name) MUST be included in the invocation.
 
 - Here are some examples of legal and illegal static interface methods and their use:
+
+---
+
+### Declare Class Members
+
+- What it means to modify a method or variable declaration.
+
+- Methods and instance variables are collectively known as members.
+
+- Can modify a member with both access and nonaccess modifiers
+
+#### Access Modifiers
+
+- method and variable members are usually given access control in exactly the same way.
+
+- a class can use just two of the four access control levels:
+  - (default or public)
+- members can use all four:
+
+  - public
+
+  - protected
+
+  - default
+
+  - private
+
+- Default protection is when you don’t type an access modifier in the member declaration.
+
+- The default and protected access control types have almost identical behavior.
+
+  - Note: As of Java 8 :
+
+    - the word default can ALSO be used to declare certain methods in interfaces.
+    - in an interface’s method declaration,
+    - default has a different meaning .
+
+- If class A has access to a member of class B, it means that class B’s member is visible to class A.
+
+- Two different access issues:
+
+  - Whether method code in one class can access a member of another class.
+
+  - Whether a subclass can inherit a member of its superclass.
+
+- when a method in one class tries to access a method or a variable of another class, using the dot operator (.) to invoke a method or retrieve a variable.
+
+```java
+
+```
+
+- Members of a superclass, a subclass can access through inheritance.
+
+- the subclass inherits a member of its superclass.
+
+- If a subclass inherits a member, it’s exactly as if the subclass actually declared the member itself.
+
+- If a subclass inherits a member, the subclass has the member.
+
+```java
+
+```
+
+---
+
+### Public Members
+
+- When a method or variable member is declared public,
+- it means all other classes, regardless of the package they belong to, can access the member.
+
+- if a method invoked (or a variable accessed) without the dot operator (.):
+  - it means the method or variable belongs to the class where you see that code.
+  - It also means that the method or variable is implicitly being accessed using the this reference.
+
+---
+
+### Private Members
+
+- Members marked private can’t be accessed by code in any class other than the class in which the private member was declared.
+
+- A private member is invisible to any code outside the member’s own class.
+
+- When a member is declared private, a subclass can’t inherit it.

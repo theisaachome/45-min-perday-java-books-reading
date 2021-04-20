@@ -12,6 +12,26 @@
 - [Use Interfaces](#use-interfaces)
 - [Declare Class Members](#declare-class-members)
   - [Access Modifiers](#access-modifiers)
+  - [Public Members](#public-members)
+  - [Private Members](#private-members)
+  - [Protected and Default Members](#protected-and-default-members)
+  - [Protected Details](#protected-details)
+  - [Local Variables and Access Modifiers](#local-variables-and-access-modifiers)
+- [Nonaccess Member Modifiers](#nonaccess-member-modifiers)
+  - [Final Methods](#final-methods)
+  - [Final Arguments](#final-arguments)
+  - [Abstract Methods](#abstract-methods)
+  - [Synchronized Methods](#synchronized-methods)
+  - [Methods with Variable Argument Lists](#methods-with-variable-argument-lists)
+- [Constructor Declaration](#constructor-declaration)
+- [Variable Declarations](#variable-declarations)
+  - [Declaring Primitives and Primitive Ranges](#declaring-primitives-and-primitive-ranges)
+  - [Declaring Reference Variables](#declaring-reference-variables)
+    - [Instance Variables](#instance-variables)
+    - [Local Variables](#local-variables)
+    - [Array Declarations](#array-declarations)
+    - [Final Variables](#final-variables)
+- [Declare and Use enums](#declare-and-use-enums)
 
 ---
 
@@ -417,3 +437,257 @@ interface TestDefault{
 - A private member is invisible to any code outside the member’s own class.
 
 - When a member is declared private, a subclass can’t inherit it.
+
+---
+
+### Protected and Default Members
+
+- Both access control levels are almost identical,
+
+- with one critical difference:
+
+  - A default member may be accessed only if the class accessing the member belongs to the same package.
+
+  - A protected member can be accessed (through inheritance) by a subclass even if the subclass is in a different package.
+
+- Default and protected behavior differ only when we talk about subclasses.
+
+- the protected member, any subclass of the class declaring the member can access it through inheritance.
+
+- the default behavior,doesn’t allow a subclass to access a superclass member unless the subclass is in the same package as the superclass.
+
+- The subclass can see the protected member only through inheritance.
+
+### Protected Details
+
+- For a subclass outside the package, the protected member can be accessed only through inheritance.
+
+```java
+
+```
+
+### Default Details
+
+- default members are visible to subclasses only if those subclasses are in the same package as the superclass.
+
+### Local Variables and Access Modifiers
+
+- Can access modifiers be applied to local variables?
+- **NO!**
+
+- there is only one modifier that can ever be applied to local variables—final.
+
+---
+
+### Nonaccess Member Modifiers
+
+- final
+
+- abstract
+
+- static
+
+- transient and synchronized.
+
+### Final Methods
+
+- The final keyword prevents a method from being overridden in a subclass.
+
+- It is often used to enforce the API functionality of a method.
+
+### Final Arguments
+
+- Method arguments are the variable declarations that appear in between the parentheses in a method declaration.
+
+- A typical method declaration with multiple arguments looks like this:
+
+```java
+ public Record
+ getRecord(int fileNumber, final int recNumber){}
+```
+
+- recNumber is declared as final, which, of course, means it can’t be modified within the method.
+
+### Abstract Methods
+
+- a method that’s been declared (as abstract) but not implemented.
+
+- it has no method body.
+
+- You mark a method abstract when you want to force subclasses to provide the implementation.
+
+  ```java
+
+    public abstract void showSample();
+  ```
+
+- It is illegal to have even a single abstract method in a class that is not explicitly declared abstract!
+
+- The first concrete subclass of an abstract class must implement all abstract methods of the superclass.
+
+- abstract class extending another abstract class, the abstract subclass doesn’t need to provide implementations for the inherited abstract methods.
+
+---
+
+### Synchronized Methods
+
+- The synchronized keyword indicates that a method can be accessed by only one thread at a time.
+
+```java
+public synchronized Record retrieveUserInfo(int id) { }
+```
+
+- The synchronized modifier can be matched with any of the four access control levels
+
+---
+
+### Methods with Variable Argument Lists
+
+- **_arguments_** The things you specify between the parentheses when you’re invoking a method:
+
+  ```java
+    public Record retrieveUserInfo(int id){}
+  ```
+
+- **_parameters_** The things in the method’s signature that indicate what
+  the method must receive when it’s invoked:
+
+  ```java
+  doStuff("a",2);
+  ```
+
+- the declaration rules for var-args:
+
+- **Var-arg type** : the parameter of your method can receive. (primitive type or an object type.)
+
+- **Basic syntax** : To declare a method using a var-arg parameter, (...)
+
+- **Other parameters** : It’s legal to have other parameters in a method that uses a var-arg.
+
+- **Var-arg limits** : The var-arg must be the last parameter in the method’s signature, and you can have only one var-arg in a method.
+
+```java
+ void doStuff(int... x){}
+ void doStuff2(char c, int... x){}
+ void doStuff3(Animal... animal){}
+```
+
+---
+
+### Constructor Declaration
+
+- A constructor can’t have a return type.
+
+- Constructor declarations can,have all of the normal access modifiers
+- they can take arguments (including var-args).
+
+- BIG RULE they must have the same name as the class in which they are declared.
+
+- Constructors can’t be marked static.
+
+- they can’t be marked final or abstract (because they can’t be overridden)
+
+---
+
+### Variable Declarations
+
+- **Primitives**
+
+  - A primitive can be one of eight types: char, boolean, byte, short, int, long, double, or float.
+
+- **Reference**
+
+  - variables A reference variable is used to refer to (or access) an object.
+
+  - can be used to refer to any object of the declared type or of a subtype of the declared type.
+
+### Declaring Primitives and Primitive Ranges
+
+- Can be declared
+
+  - as class variables (statics),
+
+  - instance variables,
+
+  - method parameters, or local variables.
+
+  - You can declare one or more primitives, of the same primitive type, in a single line.
+
+---
+
+### Declaring Reference Variables
+
+- Can be declared as
+  - static variables,
+  - instance variables,
+  - method parameters, or local variables.
+
+### Instance Variables
+
+- defined inside the class,
+- but outside of any method, and
+- are initialized only when the class is instantiated.
+- Instance variables are the fields that belong to each unique object.
+
+- know that instance variables
+  - Can use any of the four access levels
+  - Can be marked final
+  - Can be marked transient
+
+---
+
+### Local Variables
+
+- Declared within a method.
+
+- Declared and initialized within the method.
+
+- Starts its life inside the method.
+
+- it’s also destroyed when the method has completed.
+
+- Local variables are always on the stack, not the heap.
+
+- must be initialized before you try to use it.
+
+- local variables don’t get default values.
+
+---
+
+### Array Declarations
+
+- store multiple variables of the same type or variables that are all subclasses of the same type.
+
+- Arrays can hold either primitives or object references,
+
+- but an array itself will always be an object on the heap,
+
+- even if the array is declared to hold primitive elements.
+
+---
+
+### Final Variables
+
+- the final keyword makes it impossible to reassign that variable once it has been initialized with an explicit value.
+
+- A reference variable marked final can never be reassigned to refer to a different object.
+
+- The data within the object can be modified,
+
+- but the reference variable cannot be changed.
+
+- there are no final objects, only final references.
+
+---
+
+### Transient Variables
+
+- If you mark an instance variable as transient,
+
+- you’re telling the JVM to skip
+  (ignore)
+- this variable when you attempt to serialize the object containing it.
+
+---
+
+### Declare and Use enums

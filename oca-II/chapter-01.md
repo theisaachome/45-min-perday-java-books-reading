@@ -691,3 +691,112 @@ public synchronized Record retrieveUserInfo(int id) { }
 ---
 
 ### Declare and Use enums
+
+-
+
+```java
+enum CoffeeSize{
+  BIG,HUGE,OVERWHELMING
+}
+```
+
+- enums can be declared as their own class or enclosed in another class.
+
+```java
+class Coffee {
+	private CoffeeSize size;
+	public CoffeeSize getSize() {
+		return size;
+	}
+	public void setSize(CoffeeSize size) {
+		this.size = size;
+	}
+}
+public class MainApp {
+	public static void main(String[] args) {
+		var drink = new Coffee();
+		drink.setSize(CoffeeSize.BIG);
+	}
+}
+```
+
+- Each of the enumerated CoffeeSize values is actually an instance of CoffeeSize.
+- In other words, BIG is of type CoffeeSize.
+
+---
+
+### Declaring Constructors, Methods, and Variables in an enum
+
+- an enum really is a special kind of class,
+
+- more than just list the enumerated constant values.
+
+- You can add constructors, instance variables, methods, and
+
+- something really strange known as a constant specific class body.
+
+- Example:
+
+  - You want to know that
+    - BIG is 8 ounces,
+    - HUGE is 10 ounces, and
+    - OVERWHELMING is a whopping 16 ounces.
+
+```java
+enum CoffeeSize{
+	BIG(8),HUGE(10),OVERWHELMING(16);
+	private CoffeeSize(int ounces) {
+		this.ounces = ounces;
+	}
+	private int ounces;
+	public int getOunces() {
+		return ounces;
+	}
+}
+```
+
+```java
+  Coffee drink1 = new Coffee();
+  drink1.size = CoffeeSize.BIG;
+  Coffee drink2 = new Coffee();
+  drink2.size = CoffeeSize.HUGE;
+  System.out.println(drink1.size.getOunces());
+
+  for (CoffeeSize cs : CoffeeSize.values()) {
+  System.out.println(cs + " " + cs.getOunces());
+  }
+```
+
+- **_key points to remember about enum constructors_**
+
+  - NEVER invoke an enum constructor directly.
+  - The enum constructor is invoked automatically with the arguments you define after the constant value.
+
+  - can define more than one argument to the constructorand
+  - can overload the enum constructors,
+  - like overloading a normal class constructor.
+
+#### _example_
+
+```java
+
+enum CoffeeSize{
+	BIG(8),
+	HUGE(10),
+	OVERWHELMING(16){
+		public String getLidCode() {
+			return "A";
+		}
+	};
+	private CoffeeSize(int ounces) {
+		this.ounces = ounces;
+	}
+	private int ounces;
+	public int getOunces() {
+		return ounces;
+	}
+	public String getLidCode() {
+		return "B";
+	}
+}
+```
